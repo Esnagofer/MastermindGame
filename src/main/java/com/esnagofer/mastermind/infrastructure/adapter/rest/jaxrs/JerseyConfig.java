@@ -1,9 +1,8 @@
-package com.esnagofer.mastermind.infrastructure.boot;
+package com.esnagofer.mastermind.infrastructure.adapter.rest.jaxrs;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
-import com.esnagofer.mastermind.infrastructure.adapter.rest.jaxrs.HelloWorldEndpoint;
 import com.esnagofer.mastermind.infrastructure.adapter.rest.jaxrs.codemaker.CodeMakerApi;
 
 /**
@@ -23,7 +22,6 @@ public class JerseyConfig extends ResourceConfig {
      * Register endpoints.
      */
     private void registerEndpoints() {
-        register(HelloWorldEndpoint.class);
         register(CodeMakerApi.class);
     }
     

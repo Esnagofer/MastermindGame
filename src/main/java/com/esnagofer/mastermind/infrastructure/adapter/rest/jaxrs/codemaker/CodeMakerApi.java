@@ -14,17 +14,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.esnagofer.mastermind.application.v1.api.CodeBreakerGuessPatternData;
+import com.esnagofer.mastermind.application.v1.api.GameBoardIdData;
 import com.esnagofer.mastermind.application.v1.api.creategameboard.CreateGameBoardCmdQry;
 import com.esnagofer.mastermind.application.v1.api.creategameboard.CreateGameBoardCmdQryInvocation;
 import com.esnagofer.mastermind.application.v1.api.creategameboard.CreateGameBoardCmdQryInvocationSelector;
-import com.esnagofer.mastermind.domain.model.IJander;
-import com.esnagofer.mastermind.domain.model.JanderSelector;
+import com.esnagofer.mastermind.application.v1.api.trytoguesssecretpattern.TryToGuessSecretPatternCmdQry;
+import com.esnagofer.mastermind.application.v1.api.trytoguesssecretpattern.TryToGuessSecretPatternCmdQryInvocation;
+import com.esnagofer.mastermind.application.v1.api.trytoguesssecretpattern.TryToGuessSecretPatternCmdQryInvocationSelector;
 
 /**
  * The Class CodeMakerApi.
  */
 @Component
-@Path("/api/codemaker/v1")
+@Path("/mastermind/api/codemaker/v1")
 public class CodeMakerApi {
 
 	/** The invoke create game board cmd qry. */
@@ -32,14 +34,10 @@ public class CodeMakerApi {
 	@CreateGameBoardCmdQryInvocationSelector
 	private CreateGameBoardCmdQryInvocation invokeCreateGameBoardCmdQry;
 	
-//	/** The invoke try to guess secret pattern cmd qry. */
-//	@Autowired
-//	@TryToGuessSecretPatternCmdQryInvocationSelector
-//	InvokeCommandQuery<TryToGuessSecretPatternCmdQry, CodeMakerFeedbackData> invokeTryToGuessSecretPatternCmdQry;
-	
-	@Autowired 
-	@JanderSelector
-	private IJander jander;
+	/** The invoke try to guess secret pattern cmd qry. */
+	@Autowired
+	@TryToGuessSecretPatternCmdQryInvocationSelector
+	private TryToGuessSecretPatternCmdQryInvocation invokeTryToGuessSecretPatternCmdQry;
 	
 	/**
 	 * Creates the game board.
@@ -79,25 +77,24 @@ public class CodeMakerApi {
 	public void tryToGuessSecretPattern(
 		@Suspended final AsyncResponse asyncResponse, 
 		@PathParam("gameBoardId") String gameBoardId,
-		CodeBreakerGuessPatternData candidate
+		CodeBreakerGuessPatternData codeBreakerGuessPatternData
 	) {
-//		CreateGameBoardCmdQry createGameBoardCmdQry = CreateGameBoardCmdQry.newInstance();
-//		try {
-//			invokeCreateGameBoardCmdQry.invokeCommandQuery(createGameBoardCmdQry, gameBoardIdData -> {
-//				asyncResponse.resume(
-//					Response.status(Response.Status.OK)
-//					.entity(gameBoardIdData)
-//					.build()
-//				);
-//			});			
-//		} catch (Exception e) {
-//			asyncResponse.resume(e);			
-//		}		
-		asyncResponse.resume(
-			Response.status(Response.Status.OK)
-			.entity(jander.getJander())
-			.build()
+		GameBoardIdData gameBoardIdData = GameBoardIdData.newInstance(gameBoardId);
+		TryToGuessSecretPatternCmdQry tryToGuessSecretPatternCmdQry = TryToGuessSecretPatternCmdQry.newInstance(
+			gameBoardIdData, 
+			codeBreakerGuessPatternData
 		);
+		try {
+			invokeTryToGuessSecretPatternCmdQry.invokeCommandQuery(tryToGuessSecretPatternCmdQry, codeMakerFeedbackData -> {
+				asyncResponse.resume(
+					Response.status(Response.Status.OK)
+					.entity(codeMakerFeedbackData)
+					.build()
+				);
+			});			
+		} catch (Exception e) {
+			asyncResponse.resume(e);			
+		}		
 	}
 	
 }

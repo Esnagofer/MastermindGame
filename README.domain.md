@@ -1,6 +1,6 @@
 # Mastermind
 
-Dado el alcance del proyecto se acuerda la no división en subdominios (ni supporting ni generics) y se implementará todo en CORE que se implementará en un único BC.
+Dado el alcance del proyecto se consensúa la no división en subdominios (supporting & generics): se define CORE que se implementará como único Bounded Context.
 
 ## Lenguaje ubícuo en CORE
 

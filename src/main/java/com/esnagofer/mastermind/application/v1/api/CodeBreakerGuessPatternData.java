@@ -44,5 +44,5 @@ public class CodeBreakerGuessPatternData {
 		validateInvariants();
 		return Arrays.asList(new String[] {codePegColor1, codePegColor2, codePegColor3 ,codePegColor4});
 	}
-	
+
 }

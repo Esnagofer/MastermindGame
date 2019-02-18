@@ -11,6 +11,7 @@ import com.esnagofer.mastermind.application.v1.api.CodeBreakerGuessPatternData;
 import com.esnagofer.mastermind.application.v1.api.CodeMakerFeedbackData;
 import com.esnagofer.mastermind.application.v1.api.InvalidGameBoardIdException;
 import com.esnagofer.mastermind.application.v1.api.trytoguesssecretpattern.TryToGuessSecretPatternCmdQry;
+import com.esnagofer.mastermind.application.v1.api.trytoguesssecretpattern.TryToGuessSecretPatternCmdQryInvocation;
 import com.esnagofer.mastermind.application.v1.api.trytoguesssecretpattern.TryToGuessSecretPatternCmdQryInvocationSelector;
 import com.esnagofer.mastermind.domain.model.codebreaker.CodeBreakerGuessPattern;
 import com.esnagofer.mastermind.domain.model.codepeg.CodePeg;
@@ -24,7 +25,7 @@ import com.esnagofer.mastermind.domain.service.codemaker.CodeMakerService;
  */
 @Component
 @TryToGuessSecretPatternCmdQryInvocationSelector
-public class TryToGuessSecretPatternCmdQryInvocation extends InvokeCommandQueryImpl<TryToGuessSecretPatternCmdQry, CodeMakerFeedbackData> {
+public class TryToGuessSecretPatternCmdQryInvocationImpl extends InvokeCommandQueryImpl<TryToGuessSecretPatternCmdQry, CodeMakerFeedbackData> implements TryToGuessSecretPatternCmdQryInvocation {
 
 	/** The code maker service. */
 	private CodeMakerService codeMakerService;
@@ -36,7 +37,7 @@ public class TryToGuessSecretPatternCmdQryInvocation extends InvokeCommandQueryI
 	 * @param codeMakerService the code maker service
 	 */
 	@Autowired
-	public TryToGuessSecretPatternCmdQryInvocation(
+	public TryToGuessSecretPatternCmdQryInvocationImpl(
 		UnitOfWork unitOfWork,
 		CodeMakerService codeMakerService
 	) {
