@@ -76,6 +76,7 @@ public class CodeMakerService {
 	 */
 	public GameBoardGuessLogItem tryToGuessSecretPattern(GameBoardId gameBoardId, CodeBreakerGuessPattern codeBreakerGuessPattern) {
 		GameBoard gameBoard = gameBoardRepository.get(gameBoardId);
+		gameBoard.checkThatCanLogAnotherGuess();
 		CodeMakerFeedback codeMakerFeedback = CodeMakerFeedback.newInstance(
 			gameBoard.secretPattern(), 
 			codeBreakerGuessPattern,

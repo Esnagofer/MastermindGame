@@ -68,14 +68,6 @@ public class GameBoard extends DomainEntity<GameBoardId> {
 	}
 
 	/**
-	 * Check that game is not finished.
-	 */
-	private void checkThatGameIsNotFinished() {
-		checkThatLogGuessIsNotFull();
-		checkThatThereisntWinner();
-	}
-
-	/**
 	 * Check that thereisnt winner.
 	 */
 	private void checkThatThereisntWinner() {
@@ -91,6 +83,14 @@ public class GameBoard extends DomainEntity<GameBoardId> {
 		if (isLogGuessEmpty()) {
 			throw new GameBoardIsEmptyException();
 		}
+	}
+
+	/**
+	 * Check that can log another guess.
+	 */
+	public void checkThatCanLogAnotherGuess() {
+		checkThatLogGuessIsNotFull();
+		checkThatThereisntWinner();
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class GameBoard extends DomainEntity<GameBoardId> {
 	 * @param gameBoardGuessLogItem the game board guess log item
 	 */
 	public void logGuess(GameBoardGuessLogItem gameBoardGuessLogItem) {
-		checkThatGameIsNotFinished();
+		checkThatCanLogAnotherGuess();
 		guessLog.add(gameBoardGuessLogItem);
 	}
 
