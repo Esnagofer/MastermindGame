@@ -26,7 +26,7 @@ public class CodeBreakerGuessPattern extends FiniteImmutableSet<CodePeg> {
 	@Override
 	protected void validateSize() {
 		if (elements.size() != 4) {
-			throw new IllegalStateException("Max. 4 elements");
+			throw new IllegalStateException("CodeBrearkerGuessPattern: must specify exactly 4 CodePegs");
 		}
 	}
 	

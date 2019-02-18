@@ -3,6 +3,7 @@
  */
 package com.esnagofer.mastermind.application.v1.api.trytoguesssecretpattern;
 
+import com.esnagofer.lib.Validate;
 import com.esnagofer.lib.cqrs.commandquery.CommandQuery;
 import com.esnagofer.mastermind.application.v1.api.CodeBreakerGuessPatternData;
 import com.esnagofer.mastermind.application.v1.api.CodeMakerFeedbackData;
@@ -32,6 +33,12 @@ public class TryToGuessSecretPatternCmdQry extends CommandQuery<CodeMakerFeedbac
 		super(CodeMakerFeedbackData.class);
 		this.gameBoardIdData = gameBoardIdData;
 		this.codeBerakerGuessPatternData = codeBreakerGuessPatternData;
+		validateInvariants();
+	}
+
+	private void validateInvariants() {
+		Validate.thatIsNotNull("TryToGuessSecretPatternCmdQry: 'gameBoardIdData' not set", gameBoardIdData);
+		Validate.thatIsNotNull("TryToGuessSecretPatternCmdQry: 'codeBerakerGuessPatternData' not set", gameBoardIdData);
 	}
 
 	/**

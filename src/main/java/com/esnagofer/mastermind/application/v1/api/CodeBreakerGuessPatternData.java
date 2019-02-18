@@ -31,7 +31,7 @@ public class CodeBreakerGuessPatternData {
 			Validate.isEmptyString(codePegColor3) ||
 			Validate.isEmptyString(codePegColor4)
 		) {
-			throw new BadRequestException("Invalid number of CodePegs");
+			throw new IllegalStateException("CodeBreakerGuessPattern: Invalid number of CodePegs");
 		}
 	}
 	

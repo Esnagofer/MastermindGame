@@ -1,5 +1,7 @@
 package com.esnagofer.mastermind.application.v1.api;
 
+import com.esnagofer.lib.Validate;
+
 /**
  * The Class GameBoardIdData.
  */
@@ -23,8 +25,16 @@ public class GameBoardIdData {
 	protected GameBoardIdData(String value) {
 		super();
 		this.value = value;
+		validateState();
 	}
 	
+	/**
+	 * Validate state.
+	 */
+	private void validateState() {
+		Validate.thatIsNotEmpty("GameBoardIdData: 'value' not set", value);
+	}
+
 	/**
 	 * New instance.
 	 *

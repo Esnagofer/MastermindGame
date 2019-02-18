@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.esnagofer.mastermind.infrastructure.adapter.rest.jaxrs.codemaker;
 
 import javax.ws.rs.Consumes;
@@ -13,6 +16,8 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.esnagofer.lib.ddd.infrastrucutre.adapter.rest.jaxrs.ApiEndPoint;
+import com.esnagofer.mastermind.application.v1.api.BadRequestException;
 import com.esnagofer.mastermind.application.v1.api.CodeBreakerGuessPatternData;
 import com.esnagofer.mastermind.application.v1.api.GameBoardIdData;
 import com.esnagofer.mastermind.application.v1.api.creategameboard.CreateGameBoardCmdQry;
@@ -23,11 +28,11 @@ import com.esnagofer.mastermind.application.v1.api.trytoguesssecretpattern.TryTo
 import com.esnagofer.mastermind.application.v1.api.trytoguesssecretpattern.TryToGuessSecretPatternCmdQryInvocationSelector;
 
 /**
- * The Class CodeMakerApi.
+ * The Class CodeMakerApiEndPoint.
  */
 @Component
 @Path("/mastermind/api/codemaker/v1")
-public class CodeMakerApi {
+public class CodeMakerApiEndPoint extends ApiEndPoint {
 
 	/** The invoke create game board cmd qry. */
 	@Autowired
@@ -38,7 +43,7 @@ public class CodeMakerApi {
 	@Autowired
 	@TryToGuessSecretPatternCmdQryInvocationSelector
 	private TryToGuessSecretPatternCmdQryInvocation invokeTryToGuessSecretPatternCmdQry;
-	
+		
 	/**
 	 * Creates the game board.
 	 *
@@ -58,8 +63,8 @@ public class CodeMakerApi {
 					.build()
 				);
 			});			
-		} catch (Exception e) {
-			asyncResponse.resume(e);			
+		} catch (Exception exception) {
+			finalizeWithException(asyncResponse, exception);
 		}		
 	}
 
@@ -68,7 +73,7 @@ public class CodeMakerApi {
 	 *
 	 * @param asyncResponse the async response
 	 * @param gameBoardId the game board id
-	 * @param candidate the candidate
+	 * @param codeBreakerGuessPatternData the code breaker guess pattern data
 	 */
 	@POST
 	@Path("/gameboard/{gameBoardId}/try/guess/secret/pattern")
@@ -79,12 +84,12 @@ public class CodeMakerApi {
 		@PathParam("gameBoardId") String gameBoardId,
 		CodeBreakerGuessPatternData codeBreakerGuessPatternData
 	) {
-		GameBoardIdData gameBoardIdData = GameBoardIdData.newInstance(gameBoardId);
-		TryToGuessSecretPatternCmdQry tryToGuessSecretPatternCmdQry = TryToGuessSecretPatternCmdQry.newInstance(
-			gameBoardIdData, 
-			codeBreakerGuessPatternData
-		);
 		try {
+			GameBoardIdData gameBoardIdData = GameBoardIdData.newInstance(gameBoardId);
+			TryToGuessSecretPatternCmdQry tryToGuessSecretPatternCmdQry = TryToGuessSecretPatternCmdQry.newInstance(
+				gameBoardIdData, 
+				codeBreakerGuessPatternData
+			);
 			invokeTryToGuessSecretPatternCmdQry.invokeCommandQuery(tryToGuessSecretPatternCmdQry, codeMakerFeedbackData -> {
 				asyncResponse.resume(
 					Response.status(Response.Status.OK)
@@ -92,8 +97,10 @@ public class CodeMakerApi {
 					.build()
 				);
 			});			
-		} catch (Exception e) {
-			asyncResponse.resume(e);			
+		} catch (IllegalStateException e) {
+			throw new BadRequestException(e.getMessage());
+		} catch (Exception exception) {
+			finalizeWithException(asyncResponse, exception);
 		}		
 	}
 	
