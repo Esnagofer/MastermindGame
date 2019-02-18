@@ -38,7 +38,7 @@ public class GameBoardData {
 	public static GameBoardGuessLogItem createGameBoardGuessLogItem(CodePegColor guessColors, CodePegColor patternColors) {
 		CodeBreakerGuessPattern codeBreakerGuessPattern = createCodeBreakerGuessPattern(guessColors);
 		CodeMakerSecretPattern codeMakerSecretPattern = createCodeMakerSecretPattern(patternColors);
-		CodeMakerFeedback codeMakerFeedback = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern);
+		CodeMakerFeedback codeMakerFeedback = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1);
 		return GameBoardGuessLogItem.newInstance(codeBreakerGuessPattern, codeMakerFeedback);		
 	}
 	

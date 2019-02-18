@@ -20,7 +20,7 @@ public class GameBoardGuessLogItemTest {
 	public void shouldCreateGameBoardGuessLogItem() {
 		CodeBreakerGuessPattern codeBreakerGuessPattern = GameBoardData.createCodeBreakerGuessPattern(CodePegColor.BLACK);
 		CodeMakerSecretPattern codeMakerSecretPattern = GameBoardData.createCodeMakerSecretPattern(CodePegColor.RED);
-		CodeMakerFeedback codeMakerFeedback = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern);
+		CodeMakerFeedback codeMakerFeedback = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1);
 		GameBoardGuessLogItem gameBoardGuessLogItem = GameBoardGuessLogItem.newInstance(codeBreakerGuessPattern, codeMakerFeedback);
 		Assert.assertNotNull(codeMakerFeedback);
 		Assert.assertNotNull(gameBoardGuessLogItem.codeBreakerGuessPattern());

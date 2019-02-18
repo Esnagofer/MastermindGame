@@ -19,7 +19,11 @@ public class CodeMakerFeedbackConverter {
 	 */
 	public static CodeMakerFeedbackData fromDomainToApplication(CodeMakerFeedback codeMakerFeedback) {
 		List<String> keyPegs = codeMakerFeedback.elements().stream().map(keyPeg -> keyPeg.color().name()).collect(Collectors.toList());
-		return CodeMakerFeedbackData.newInstance(keyPegs.toArray(new String[keyPegs.size()]));
+		return CodeMakerFeedbackData.newInstance(
+			codeMakerFeedback.turnsLeft(),
+			codeMakerFeedback.message(),
+			keyPegs.toArray(new String[keyPegs.size()])
+		);
 	}
 	
 }
