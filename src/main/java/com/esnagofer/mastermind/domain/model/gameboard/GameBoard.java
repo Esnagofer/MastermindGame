@@ -94,6 +94,15 @@ public class GameBoard extends DomainEntity<GameBoardId> {
 	}
 
 	/**
+	 * Turns left.
+	 *
+	 * @return the int
+	 */
+	public int turnsLeft() {
+		return ROWS - guessLog().size() - 1;
+	}
+	
+	/**
 	 * Secret pattern.
 	 *
 	 * @return the game secret pattern

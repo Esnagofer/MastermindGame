@@ -79,7 +79,12 @@ public class FiniteImmutableSet<T> extends DomainValueObject {
 		return elements.equals(finiteImmutableSet.elements);
 	}
 
-
+	@Override
+	public String toString() {
+		Acabar ésto
+		return String.format("[%s]", elements.stream().map(Object::toString));
+	}
+	
 	/**
 	 * Elements.
 	 *

@@ -65,6 +65,14 @@ public class GameBoardGuessLogItem extends DomainValueObject {
 			this.codeBreakerGuessPattern.equals(gameBoardGuessLogItemTest.codeBreakerGuessPattern) &&
 			this.codeMakerFeedback.equals(gameBoardGuessLogItemTest.codeMakerFeedback);
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return String.format("[%s - %s]", codeBreakerGuessPattern.toString(), codeMakerFeedback.toString());
+	}
 
 	/**
 	 * Code breaker guess pattern.
