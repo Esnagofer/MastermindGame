@@ -1,5 +1,7 @@
 package com.esnagofer.mastermind.domain.model.gameboard;
 
+import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -20,9 +22,10 @@ public class GameBoardGuessLogItemTest {
 	public void shouldCreateGameBoardGuessLogItem() {
 		CodeBreakerGuessPattern codeBreakerGuessPattern = GameBoardData.createCodeBreakerGuessPattern(CodePegColor.BLACK);
 		CodeMakerSecretPattern codeMakerSecretPattern = GameBoardData.createCodeMakerSecretPattern(CodePegColor.RED);
-		CodeMakerFeedback codeMakerFeedback = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1);
+		CodeMakerFeedback codeMakerFeedback = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1, new ArrayList<>());
 		GameBoardGuessLogItem gameBoardGuessLogItem = GameBoardGuessLogItem.newInstance(codeBreakerGuessPattern, codeMakerFeedback);
 		Assert.assertNotNull(codeMakerFeedback);
+		Assert.assertNotNull(codeMakerFeedback.guessLog());
 		Assert.assertNotNull(gameBoardGuessLogItem.codeBreakerGuessPattern());
 		Assert.assertNotNull(gameBoardGuessLogItem.codeMakerFeedback());		
 		Assert.assertEquals(codeBreakerGuessPattern, gameBoardGuessLogItem.codeBreakerGuessPattern());

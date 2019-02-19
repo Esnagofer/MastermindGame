@@ -35,6 +35,11 @@ public class TryToGuessSecretPatternCmdQryInvocationImpl extends InvokeCommandQu
 	/**
 	 * Instantiates a new try to guess secret pattern command invocation.
 	 *
+	 * TODO: 	Esta no es la mejor forma de hacerlo ya que exponemos en el
+	 * 			contructor un aspecto CROSS como es la gestión de la 
+	 * 			transacción (UnitOfWork): la forma correcta es implementar un interceptor
+	 * 			con AOP para implementar el aspecto directamente en infrastructura.
+	 * 			
 	 * @param unitOfWork the unit of work
 	 * @param codeMakerService the code maker service
 	 */

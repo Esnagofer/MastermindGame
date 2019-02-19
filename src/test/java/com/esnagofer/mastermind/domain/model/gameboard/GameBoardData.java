@@ -1,5 +1,7 @@
 package com.esnagofer.mastermind.domain.model.gameboard;
 
+import java.util.ArrayList;
+
 import com.esnagofer.mastermind.domain.model.codebreaker.CodeBreakerGuessPattern;
 import com.esnagofer.mastermind.domain.model.codemaker.CodeMakerFeedback;
 import com.esnagofer.mastermind.domain.model.codemaker.CodeMakerSecretPattern;
@@ -38,7 +40,7 @@ public class GameBoardData {
 	public static GameBoardGuessLogItem createGameBoardGuessLogItem(CodePegColor guessColors, CodePegColor patternColors) {
 		CodeBreakerGuessPattern codeBreakerGuessPattern = createCodeBreakerGuessPattern(guessColors);
 		CodeMakerSecretPattern codeMakerSecretPattern = createCodeMakerSecretPattern(patternColors);
-		CodeMakerFeedback codeMakerFeedback = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1);
+		CodeMakerFeedback codeMakerFeedback = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1, new ArrayList<>());
 		return GameBoardGuessLogItem.newInstance(codeBreakerGuessPattern, codeMakerFeedback);		
 	}
 	

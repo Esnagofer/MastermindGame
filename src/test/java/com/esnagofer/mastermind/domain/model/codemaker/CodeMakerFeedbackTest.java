@@ -1,5 +1,6 @@
 package com.esnagofer.mastermind.domain.model.codemaker;
 
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import org.junit.Assert;
@@ -23,7 +24,7 @@ public class CodeMakerFeedbackTest {
 	public void shouldCreateCodeMakerFeedback() {
 		CodeMakerSecretPattern codeMakerSecretPattern = CodeMakerSecretPattern.newInstance();
 		CodeBreakerGuessPattern codeBreakerGuessPattern = CodeBreakerGuessPattern.newInstance(CodePegData.fourCodePegs());
-		CodeMakerFeedback feedBack = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1);
+		CodeMakerFeedback feedBack = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1, new ArrayList<>());
 		Assert.assertNotNull(feedBack);
 	}
 
@@ -34,7 +35,7 @@ public class CodeMakerFeedbackTest {
 	public void shouldFailsCreateCodeMakerFeedbackWhenInvalidTurn() {
 		CodeMakerSecretPattern codeMakerSecretPattern = CodeMakerSecretPattern.newInstance();
 		CodeBreakerGuessPattern codeBreakerGuessPattern = CodeBreakerGuessPattern.newInstance(CodePegData.fourCodePegs());
-		CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, -1);
+		CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, -1, new ArrayList<>());
 	}
 
 	/**
@@ -43,7 +44,7 @@ public class CodeMakerFeedbackTest {
 	@Test(expected=IllegalStateException.class)
 	public void shouldFailsCreateCodeMakerFeedbackWhenInvalidSecretPattern() {
 		CodeBreakerGuessPattern codeBreakerGuessPattern = CodeBreakerGuessPattern.newInstance(CodePegData.fourCodePegs());
-		CodeMakerFeedback.newInstance(null, codeBreakerGuessPattern, 1);
+		CodeMakerFeedback.newInstance(null, codeBreakerGuessPattern, 1, new ArrayList<>());
 	}
 
 	/**
@@ -52,7 +53,7 @@ public class CodeMakerFeedbackTest {
 	@Test(expected=IllegalStateException.class)
 	public void shouldFailsCreateCodeMakerFeedbackWhenInvalidGuessPattern() {
 		CodeMakerSecretPattern codeMakerSecretPattern = CodeMakerSecretPattern.newInstance();
-		CodeMakerFeedback.newInstance(codeMakerSecretPattern, null, 1);
+		CodeMakerFeedback.newInstance(codeMakerSecretPattern, null, 1, new ArrayList<>());
 	}
 
 	/**
@@ -60,7 +61,7 @@ public class CodeMakerFeedbackTest {
 	 */
 	@Test(expected=IllegalStateException.class)
 	public void shouldFailsCreateCodeMakerFeedbackWhenInvalidGuessAndSecretPatterns() {
-		CodeMakerFeedback.newInstance(null, null, 1);
+		CodeMakerFeedback.newInstance(null, null, 1, new ArrayList<>());
 	}
 
 	/**
@@ -70,8 +71,9 @@ public class CodeMakerFeedbackTest {
 	public void shouldFailGuess() {
 		CodeMakerSecretPattern codeMakerSecretPattern = CodeMakerSecretPattern.newInstance(CodePegData.fourCodePegsWithSameColor(CodePegColor.BLACK));
 		CodeBreakerGuessPattern codeBreakerGuessPattern = CodeBreakerGuessPattern.newInstance(CodePegData.fourCodePegsWithSameColor(CodePegColor.RED));
-		CodeMakerFeedback feedBack = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1);
+		CodeMakerFeedback feedBack = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1, new ArrayList<>());
 		Assert.assertNotNull(feedBack);
+		Assert.assertNotNull(feedBack.guessLog());
 		Assert.assertFalse(feedBack.isWinner());
 		Assert.assertEquals(0, feedBack.elements().size());
 		Assert.assertEquals(1, feedBack.turnsLeft());
@@ -84,8 +86,9 @@ public class CodeMakerFeedbackTest {
 	public void shouldGuess() {
 		CodeMakerSecretPattern codeMakerSecretPattern = CodeMakerSecretPattern.newInstance(CodePegData.fourCodePegsWithSameColor(CodePegColor.BLUE));
 		CodeBreakerGuessPattern codeBreakerGuessPattern = CodeBreakerGuessPattern.newInstance(CodePegData.fourCodePegsWithSameColor(CodePegColor.BLUE));
-		CodeMakerFeedback feedBack = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1);
+		CodeMakerFeedback feedBack = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1, new ArrayList<>());
 		Assert.assertNotNull(feedBack);
+		Assert.assertNotNull(feedBack.guessLog());
 		Assert.assertTrue(feedBack.isWinner());
 		Assert.assertEquals(4, feedBack.elements().size());
 		Assert.assertEquals(4, feedBack.elements().stream()
@@ -111,7 +114,7 @@ public class CodeMakerFeedbackTest {
 							CodePeg.newInstance(color3),
 							CodePeg.newInstance(color4)							
 						);
-						CodeMakerFeedback feedBack = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1);
+						CodeMakerFeedback feedBack = CodeMakerFeedback.newInstance(codeMakerSecretPattern, codeBreakerGuessPattern, 1, new ArrayList<>());
 						if (feedBack.isWinner()) {
 							countWinners = countWinners + 1;
 						}

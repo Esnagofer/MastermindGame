@@ -80,9 +80,9 @@ public class CodeMakerService {
 		CodeMakerFeedback codeMakerFeedback = CodeMakerFeedback.newInstance(
 			gameBoard.secretPattern(), 
 			codeBreakerGuessPattern,
-			gameBoard.turnsLeft()
+			gameBoard.turnsLeft(),
+			gameBoard.guessLog()
 		);
-		gameBoard.guessLog().stream().map(Object::toString);
 		gameBoard.logGuess(GameBoardGuessLogItem.newInstance(codeBreakerGuessPattern, codeMakerFeedback));
 		domainEventManager.publish(CodeBreakerGuessPatternTriedEvent.newInstance(gameBoardId, gameBoard.lastLogGuess()));
 		return gameBoard.lastLogGuess();
