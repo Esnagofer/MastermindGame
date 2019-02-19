@@ -11,5 +11,5 @@ cd esnagofer-mastermind-game
 git checkout master
 git pull
 mvn install
-java -jar target/mastermind-game-1.0.0.jar
+java -jar target/esnagofer-mastermind-game-1.0.0.jar
 
