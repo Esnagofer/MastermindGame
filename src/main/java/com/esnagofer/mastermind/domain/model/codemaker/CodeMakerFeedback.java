@@ -1,6 +1,7 @@
 package com.esnagofer.mastermind.domain.model.codemaker;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,21 +25,27 @@ public class CodeMakerFeedback extends FiniteImmutableSet<KeyPeg> {
 	/** The guess log. */
 	private List<GameBoardGuessLogItem> guessLog;
 	
+	/** The code maker secret pattern. */
+	private String codeMakerSecretPattern;
+	
 	/**
 	 * Instantiates a new code maker feedback.
 	 *
 	 * @param elements the elements
 	 * @param turnsLeft the this guess
 	 * @param guessLog the guess log
+	 * @param codeMakerSecretPattern the code maker secret pattern
 	 */
 	protected CodeMakerFeedback (
 		List<KeyPeg> elements, 
 		int turnsLeft,
-		List<GameBoardGuessLogItem> guessLog
+		List<GameBoardGuessLogItem> guessLog,
+		String codeMakerSecretPattern
 	) {
 		super(elements);
 		this.turnsLeft = turnsLeft;
 		this.guessLog = guessLog;
+		this.codeMakerSecretPattern = codeMakerSecretPattern;
 		validateInvariants();
 	}
 	
@@ -81,7 +88,7 @@ public class CodeMakerFeedback extends FiniteImmutableSet<KeyPeg> {
 			if (turnsLeft > 0) {
 				return "Try again!"; 				
 			}
-			return "Game Over. You lose!"; 
+			return String.format("Game Over. You lose!. The secret code was %s", codeMakerSecretPattern); 
 		}
 	}
 	
@@ -125,8 +132,8 @@ public class CodeMakerFeedback extends FiniteImmutableSet<KeyPeg> {
 	) {
 		Validate.thatIsNotNull("CodeMakerFeedBack: 'codeMakerSecretPattern' not set", codeMakerSecretPattern);
 		Validate.thatIsNotNull("CodeMakerFeedBack: 'codeMakerSecretPattern' not set", codeBreakerGuessPattern);
-		Validate.thatIsNotNull("CodeMakerFeedBack: 'turnsLeft' not set", turnsLeft);
 		Validate.thatIsNotNull("CodeMakerFeedBack: 'guessLog' not set", guessLog);
+		Validate.thatIsNotNull("CodeMakerFeedBack: 'turnsLeft' not set", turnsLeft);
 		Validate.custom("", turnsLeft, value -> {
 			return turnsLeft >= 0;
 		});
@@ -142,7 +149,8 @@ public class CodeMakerFeedback extends FiniteImmutableSet<KeyPeg> {
 			}
 			index++;
 		}		
-		return new CodeMakerFeedback(result, turnsLeft, guessLog);
+		Collections.shuffle(result);
+		return new CodeMakerFeedback(result, turnsLeft, guessLog, codeMakerSecretPattern.toString());
 	}
 	
 }
