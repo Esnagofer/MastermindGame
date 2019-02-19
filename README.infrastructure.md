@@ -1,11 +1,15 @@
+
 # Mastermind
 
 ## API Spec
-Swagger URL: https://app.swaggerhub.com/apis/axiomadeeleccion/MasterMindCodeMaker/1.0.0-oas3
+Swagger SPEC: https://app.swaggerhub.com/apis/axiomadeeleccion/MasterMindCodeMaker/1.0.0-oas3
 
 
 ## Build & RUN
-git clone https://github.com/Esnagofer/MastermindGame.git
-cd MastermindGame
-mvn spring-boot:run
+git clone https://github.com/Esnagofer/esnagofer-mastermind-game.git
+cd esnagofer-mastermind-game
+git checkout master
+git pull
+mvn install
+java -jar target/mastermind-game-1.0.0.jar
 
