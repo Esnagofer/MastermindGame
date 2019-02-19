@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.esnagofer</groupId>
 	<artifactId>esnagofer-mastermind-game</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>Mastermind Game</name>
 	<description>The Mastermind Game</description>
 	<properties>
