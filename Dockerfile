@@ -16,7 +16,7 @@ RUN mvn verify
 
 FROM openjdk:8-jre-slim
 
-COPY --from=builder /app/target/mastermind-game-1.0.0-SNAPSHOT.jar /opt/mastermind-game-1.0.0-SNAPSHOT.jar
+COPY --from=builder /app/target/esnagofer-mastermind-game-*.jar /opt/esnagofer-mastermind-game.jar
 
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/opt/mastermind-game-1.0.0-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "/opt/esnagofer-mastermind-game.jar"]

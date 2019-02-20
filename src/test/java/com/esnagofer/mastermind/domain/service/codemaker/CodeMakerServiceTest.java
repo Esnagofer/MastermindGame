@@ -16,7 +16,7 @@ import com.esnagofer.mastermind.domain.model.gameboard.GameBoardRepository;
 /**
  * The Class CodeMakerTest.
  */
-public class CodeMakerTest {
+public class CodeMakerServiceTest {
 
 	/**
 	 * Game board.

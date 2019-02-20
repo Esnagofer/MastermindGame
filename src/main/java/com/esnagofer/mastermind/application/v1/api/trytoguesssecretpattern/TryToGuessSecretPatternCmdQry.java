@@ -38,7 +38,7 @@ public class TryToGuessSecretPatternCmdQry extends CommandQuery<CodeMakerFeedbac
 
 	private void validateInvariants() {
 		Validate.thatIsNotNull("TryToGuessSecretPatternCmdQry: 'gameBoardIdData' not set", gameBoardIdData);
-		Validate.thatIsNotNull("TryToGuessSecretPatternCmdQry: 'codeBerakerGuessPatternData' not set", gameBoardIdData);
+		Validate.thatIsNotNull("TryToGuessSecretPatternCmdQry: 'codeBerakerGuessPatternData' not set", codeBerakerGuessPatternData);
 	}
 
 	/**
