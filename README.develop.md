@@ -1,4 +1,4 @@
-#MASTERMIND
+##MASTERMIND
 
 
 ## DISCLAIMER
@@ -26,5 +26,3 @@ Esto significa que tendríamos 1 repositorio de fuente con los 3 proyectos maven
 Los 3 quedarían coregidos bajo un POM padre multimódulo con el que compilar todo el proyecto.
 
 Los repositorios para LIB se puede valorar si deben tener un repo independiente o uno para los 3.
-
-6.  Generar una imagen DOCKER para correr el servicio.
