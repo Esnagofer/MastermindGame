@@ -21,7 +21,10 @@ Infrastructure --> Depende de DOMAIN & APPLICATION
 
 Esto aplica a los 3 proyectos LIB (Application, Model, Infrastructure)
 
-Esto significa que tendríamos 1 repositorio de fuente con los 3 proyectos maven de MASTERMIND (Application, Domain, Infrastructure): los 3 quedarían coregidos bajo un POM padre multimódulo con el que compilar todo el proyecto.
+Esto significa que tendríamos 1 repositorio de fuente con los 3 proyectos maven de MASTERMIND (Application, Domain, Infrastructure).
+
+Los 3 quedarían coregidos bajo un POM padre multimódulo con el que compilar todo el proyecto.
+
 Los repositorios para LIB se puede valorar si deben tener un repo independiente o uno para los 3.
 
 6.  Generar una imagen DOCKER para correr el servicio.
