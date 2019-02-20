@@ -12,7 +12,7 @@ cd esnagofer-mastermind-game
 git checkout master
 git pull
 mvn install
-java -jar target/esnagofer-mastermind-game-1.0.2.jar
+java -jar target/esnagofer-mastermind-game-1.0.4.jar
 
 ## Try
 
